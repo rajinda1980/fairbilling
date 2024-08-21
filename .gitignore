@@ -1,0 +1,13 @@
+# Maven build output
+target/
+
+# IDE-specific files
+.idea/
+.classpath
+.project
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
