@@ -1,14 +1,17 @@
 package com.bt.fairbilling.report;
 
 public class FileWriterProxy {
-    private FileWriter fairBillingWriter;
+    private FileWriter fileWriter;
 
     public FileWriter getFileWriter(ReportType reportType) {
-        fairBillingWriter =
+        if (null == reportType) {
+            return null;
+        }
+        fileWriter =
                 switch (reportType) {
                     case TXT -> new TextFileWriter();
                     default -> null;
                 };
-        return fairBillingWriter;
+        return fileWriter;
     }
 }

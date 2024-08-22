@@ -17,12 +17,10 @@ import java.util.stream.Stream;
 public class FirBillingAppTest {
 
     @AfterEach
-    void cleanUp() {
-        try {
-            Path filePath = Paths.get(TestConstants.OUTPUT_FILE_PATH);
-            Files.delete(filePath);
-            System.out.println("File is deleted");
-        } catch (Exception e) {}
+    void cleanUp() throws Exception {
+        Path filePath = Paths.get(TestConstants.OUTPUT_FILE_PATH);
+        Files.delete(filePath);
+        System.out.println("File is deleted");
     }
 
     /**
@@ -39,7 +37,7 @@ public class FirBillingAppTest {
 
     @ParameterizedTest
     @MethodSource
-    public void shouldGenerateReport(String sourceFile) {
+    public void shouldGenerateReport(String sourceFile) throws Exception {
         FairBillingApp.main(new String[] {sourceFile});
         Path path = Paths.get(TestConstants.OUTPUT_FILE_PATH);
 
@@ -68,8 +66,7 @@ public class FirBillingAppTest {
             String[] charlieParts = charlieRecord.split(" ");
             Assertions.assertEquals("3", charlieParts[1]);
             Assertions.assertEquals("37", charlieParts[2]);
-
-        } catch (Exception e) { }
+        }
     }
 
     @DisplayName("Generating an empty report if there are no records that match the criteria")

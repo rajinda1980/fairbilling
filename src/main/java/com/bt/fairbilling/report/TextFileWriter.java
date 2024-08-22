@@ -21,8 +21,12 @@ public class TextFileWriter implements FileWriter {
      * @throws Exception
      */
     public void printReport(Stream<String> lines) throws Exception {
-        Path path = Path.of(FILE_OUTPUT_PATH);
-        Files.write(path, (Iterable<String>) lines::iterator, StandardOpenOption.CREATE,
-                StandardOpenOption.TRUNCATE_EXISTING);
+        try {
+            Path path = Path.of(FILE_OUTPUT_PATH);
+            Files.write(path, (Iterable<String>) lines::iterator, StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (Exception e) {
+            throw new Exception("Failed to write report to file : " + e.getMessage());
+        }
     }
 }

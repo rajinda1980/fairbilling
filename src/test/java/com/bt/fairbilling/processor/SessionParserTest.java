@@ -1,9 +1,6 @@
 package com.bt.fairbilling.processor;
 
 import com.bt.fairbilling.TestConstants;
-import com.bt.fairbilling.processor.SessionParser;
-import com.bt.fairbilling.processor.SessionRecord;
-import com.bt.fairbilling.processor.SessionType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
