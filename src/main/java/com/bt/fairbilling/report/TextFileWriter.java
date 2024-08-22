@@ -1,18 +1,13 @@
-package com.bt.fairbilling.processor;
+package com.bt.fairbilling.report;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.stream.Stream;
 
-public class FairBillingFileWriter {
+public class TextFileWriter implements FileWriter {
 
     private static final String FILE_OUTPUT_PATH = "output.txt";
-    private Stream<String> lines;
-
-    public FairBillingFileWriter(Stream<String> lines) {
-        this.lines = lines;
-    }
 
     /**
      * Write the session object details for each user to a text file.
@@ -25,7 +20,7 @@ public class FairBillingFileWriter {
      *
      * @throws Exception
      */
-    public void printReport() throws Exception {
+    public void printReport(Stream<String> lines) throws Exception {
         Path path = Path.of(FILE_OUTPUT_PATH);
         Files.write(path, (Iterable<String>) lines::iterator, StandardOpenOption.CREATE,
                 StandardOpenOption.TRUNCATE_EXISTING);

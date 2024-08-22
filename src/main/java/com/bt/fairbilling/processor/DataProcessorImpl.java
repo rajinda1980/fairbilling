@@ -1,16 +1,13 @@
 package com.bt.fairbilling.processor;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
-public class FairBillingProcessor {
+public class DataProcessorImpl implements DataProcessor {
 
 
     private static final String STATUS_START = "Start";
@@ -19,7 +16,7 @@ public class FairBillingProcessor {
     private final String filePath;
     private Map<String, UserSession> userSessionMap = new HashMap<>();
 
-    public FairBillingProcessor(String filePath) {
+    public DataProcessorImpl(String filePath) {
         this.filePath = filePath;
     }
 
@@ -67,25 +64,16 @@ public class FairBillingProcessor {
             for (Map.Entry<String, UserSession> e : userSessionMap.entrySet()) {
                 e.getValue().calculateRemainingSessionTime(endTime);
             }
+
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("File not found. Please check the file path");
+
+        } catch (Exception e) {
+            throw new Exception("UNKNOWN EXCEPTION : " + e.getMessage());
         }
     }
 
-    /**
-     * Calling file writer
-     * @throws Exception
-     */
-    public void printReport() throws Exception {
-        FairBillingFileWriter writer;
-
-        try (Stream<String> lines = userSessionMap.entrySet()
-                                        .stream().map(e -> e.getKey() + " " + e.getValue().getSessionCount() + " "
-                                                                + e.getValue().getTotalSessionTime())) {
-            writer = new FairBillingFileWriter(lines);
-            writer.printReport();
-
-        } catch (Exception e) {
-            System.out.println("Error in writing to output file. Exception : " + e.getMessage());
-            throw new Exception(e);
-        }
+    public Map<String, UserSession> getUserSessionMap() throws Exception {
+        return userSessionMap;
     }
 }

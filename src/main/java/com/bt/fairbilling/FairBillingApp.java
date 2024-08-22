@@ -1,6 +1,9 @@
 package com.bt.fairbilling;
 
-import com.bt.fairbilling.processor.FairBillingProcessor;
+import com.bt.fairbilling.processor.*;
+import com.bt.fairbilling.report.ReportService;
+import com.bt.fairbilling.report.ReportServiceImpl;
+import com.bt.fairbilling.report.ReportType;
 
 import java.io.FileNotFoundException;
 
@@ -17,20 +20,24 @@ public class FairBillingApp {
             System.out.println("FairBilling Application: Log file is not provided");
             System.exit(1);
         }
+        process(args);
+    }
 
+    private static void process(String[] args) {
         String logFilePath = args[0];
         try {
-            FairBillingProcessor processor = new FairBillingProcessor(logFilePath);
+            DataProcessor processor = new DataProcessorImpl(logFilePath);
             processor.processFile();
-            processor.printReport();
+
+            ReportService writer = new ReportServiceImpl(processor.getUserSessionMap());
+            writer.printReport(ReportType.TXT);
 
         } catch (FileNotFoundException e) {
-            System.out.println("File does not exist in the file path. Exception : " + e.getMessage());
-            System.exit(1);
+            System.out.println("File processing exception : " + e.getMessage());
 
         } catch (Exception e) {
             System.out.println("File processing exception : " + e.getMessage());
-            System.exit(1);
         }
     }
+
 }

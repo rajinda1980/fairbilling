@@ -13,7 +13,7 @@ public class SessionParser {
         if (3 == parts.length) {
             try {
                 LocalTime time = LocalTime.parse(parts[0], LOG_TIME_FORMATTER);
-                String username = parts[1];
+                String username = parts[1].toUpperCase();
                 SessionType type = SessionType.valueOf(parts[2].toUpperCase());
                 return new SessionRecord(username, time, type);
 
