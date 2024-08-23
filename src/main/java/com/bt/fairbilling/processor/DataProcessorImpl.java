@@ -6,9 +6,11 @@ import java.io.FileReader;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class DataProcessorImpl implements DataProcessor {
 
+    private static final Logger LOGGER = Logger.getLogger(DataProcessorImpl.class.getName());
 
     private static final String STATUS_START = "Start";
     private static final String STATUS_END = "End";
@@ -66,9 +68,11 @@ public class DataProcessorImpl implements DataProcessor {
             }
 
         } catch (FileNotFoundException e) {
+            LOGGER.severe("File processing is unsuccessful");
             throw new FileNotFoundException("File not found. Please check the file path");
 
         } catch (Exception e) {
+            LOGGER.severe("File processing is unsuccessful");
             throw new Exception("UNKNOWN EXCEPTION : " + e.getMessage());
         }
     }

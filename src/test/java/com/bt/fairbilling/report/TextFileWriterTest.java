@@ -70,6 +70,6 @@ public class TextFileWriterTest {
     @Test
     public void shouldCaptureException() throws Exception {
         Exception exception = Assertions.assertThrows(Exception.class, () -> textFileWriter.printReport(null));
-        Assertions.assertTrue(exception.getMessage().contains("Failed to write report to file"));
+        Assertions.assertTrue(exception.getMessage().contains("Failed to write the report to the file"));
     }
 }

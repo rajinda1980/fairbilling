@@ -4,9 +4,12 @@ import com.bt.fairbilling.processor.UserSession;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 public class ReportServiceImpl implements ReportService {
+
+    private static final Logger LOGGER = Logger.getLogger(ReportServiceImpl.class.getName());
 
     private final FileWriterProxy fileWriterProxy;
     private Map<String, UserSession> userSessionMap = new HashMap<>();
@@ -28,12 +31,13 @@ public class ReportServiceImpl implements ReportService {
             FileWriter writer = fileWriterProxy.getFileWriter(type);
 
             if (writer == null) {
-                throw new RuntimeException("File writer is not found");
+                LOGGER.severe("File writer is not found for the specified report type " + type);
+                throw new RuntimeException("FFile writer is not found for the specified report type " + type);
             }
             writer.printReport(lines);
 
         } catch (Exception e) {
-            System.out.println("Error in writing to output file. Exception : " + e.getMessage());
+            LOGGER.severe("Error in writing to the output file. Exception : " + e.getMessage());
             throw new Exception(e);
         }
     }
