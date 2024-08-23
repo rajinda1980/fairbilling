@@ -1,6 +1,7 @@
 #!/bin/bash
 
-OUTPUT_FILE_PATH="./output.txt"
+INPUT_FILE_PATH="$(pwd)/logfile.log"
+OUTPUT_FILE_PATH="$(pwd)/output.txt"
 DOCKER_IMAGE="fairbilling:v1"
 
 # Creating output file
@@ -39,7 +40,7 @@ docker build -t "$DOCKER_IMAGE" .
 
 # Running Docker container and mounting volumes
 echo "Running Docker container and mounting $OUTPUT_FILE_PATH to /app/output.txt"
-sudo docker run -v "$(pwd)/logfile.log:/logfile.log" -v "$(pwd)/$OUTPUT_FILE_PATH:/app/output.txt" "$DOCKER_IMAGE" "/logfile.log"
+sudo docker run -v "$INPUT_FILE_PATH:/logfile.log" -v "$OUTPUT_FILE_PATH:/app/output.txt" "$DOCKER_IMAGE" "/logfile.log"
 
 # Cleanup
 rm Dockerfile create-file.sh
