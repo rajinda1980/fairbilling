@@ -50,6 +50,6 @@
 #### Information
 
 1. Forty test cases are written to cover the complete functionality of the application <br>
-2. An empty file should be generated if no records match the criteria. The criteria are that the record should contain time, username, and session state, each followed by one or more space <br>
+2. An empty file should be generated if no records match the criteria. The criteria are that the record should contain time, username, and session state, each followed by one or more spaces <br>
    > 14:02:03 User1 Start <br>
    > 14:02:32 User2 End
