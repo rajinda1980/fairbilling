@@ -2,9 +2,11 @@ package com.bt.fairbilling.processor;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 public class SessionParser {
 
+    private static final Logger LOGGER = Logger.getLogger(SessionParser.class.getName());
     private static final DateTimeFormatter LOG_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     public static SessionRecord getSessionRecord(String logLine) {
@@ -18,7 +20,7 @@ public class SessionParser {
                 return new SessionRecord(username, time, type);
 
             } catch (Exception e) {
-                System.err.println("Session record cannot be generated. Exception : " + e.getMessage());
+                LOGGER.severe("Session record could not be generated. Given record : " + logLine + ",  Exception : " + e.getMessage());
                 return null;
             }
 
