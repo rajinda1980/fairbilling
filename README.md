@@ -7,17 +7,17 @@
 - Open your terminal window
 - Download the application from GitHub
   ```
-  git clone https://github.com/rajinda1980/fairbilling.git <br>
+  git clone https://github.com/rajinda1980/fairbilling.git 
   Ex : root@Rajinda-D-L:~/Application$ git clone https://github.com/rajinda1980/fairbilling.git
   ```
 - Navigate to the "fairbilling" root folder
   ```
-  cd fairbilling/ <br>
+  cd fairbilling/ 
   Ex : root@Rajinda-D-L:~/Application$ cd fairbilling/
   ```
 - Run the following command to build and run the application
   ```
-  ./build_and_run.sh <br>
+  ./build_and_run.sh 
   Ex : root@Rajinda-D-L:~/Application$ ./build_and_run.sh
   ```
 
